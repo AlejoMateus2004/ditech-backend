@@ -27,10 +27,15 @@ public class UserController {
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteUser(@RequestBody AppUser user) {
-        String message = userService.deleteUser(user);
-        return new ResponseEntity<>(message, HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable String id) {
+        Optional<AppUser> optionalUser = userService.getUserById(id);
+        if (optionalUser.isPresent()) {
+            String message = userService.deleteUser(optionalUser.get());
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/{id}")
