@@ -1,7 +1,14 @@
 package com.backend_user_service.backend.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class AppUser {
     @Id
@@ -15,45 +22,4 @@ public class AppUser {
     @Column(name = "active", nullable = false)
     private boolean active;
 
-    public AppUser() {
-    }
-
-    public AppUser(Long id, String username, String email, boolean active) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.active = active;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }
