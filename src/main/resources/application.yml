@@ -8,7 +8,6 @@ spring:
     name: backend
 
   datasource:
-    #    database-platform: org.hibernate.dialect.H2Dialect
     url: jdbc:h2:mem:testdb
     username: sa
     password: sa
@@ -26,9 +25,6 @@ spring:
         dialect:
           database-platform: org.hibernate.dialect.H2Dialect
 
-  #  sql:
-  #    init:
-  #      mode: embedded
   h2:
     console:
       enabled: true
