@@ -3,25 +3,28 @@ package com.backend_user_service.backend.service;
 import com.backend_user_service.backend.model.AppUser;
 import com.backend_user_service.backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class UserServiceTest {
 
-    @Autowired
+    @Mock
+    private UserRepository userRepository;
+
+    @InjectMocks
     private UserService userService;
 
-    @MockBean
-    private UserRepository userRepository;
 
     @Test
     void saveUser() {
@@ -36,6 +39,7 @@ class UserServiceTest {
         assertEquals(user.getUsername(), savedUser.getUsername());
         assertEquals(user.getEmail(), savedUser.getEmail());
         assertTrue(savedUser.isActive());
+        Mockito.verify(userRepository, Mockito.times(1)).save(user);
     }
 
     @Test
