@@ -12,6 +12,7 @@ spring:
     username: sa
     password: sa
     driver-class-name: org.h2.Driver
+
   jpa:
     generate-ddl: true
     show-sql: false
@@ -33,10 +34,24 @@ spring:
         trace: false
         web-allow-others: true
 
-
-
   sql:
     init:
-      mode=always:
+      mode: always
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+    health:
+      show-details: ALWAYS
+  info:
+    env:
+      enabled: true
