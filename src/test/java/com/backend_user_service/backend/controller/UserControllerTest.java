@@ -57,15 +57,16 @@ class UserControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
         AppUser user = new AppUser();
+        user.setId(1L);
         user.setUsername("test_user");
         user.setEmail("test_user@example.com");
         user.setActive(true);
 
+        Mockito.when(userService.getUserById(Mockito.anyString())).thenReturn(Optional.of(user));
+
         Mockito.when(userService.deleteUser(Mockito.any(AppUser.class))).thenReturn("User deleted successfully");
 
-        mockMvc.perform(delete("/users")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"username\": \"test_user\", \"email\": \"test_user@example.com\", \"active\": true}"))
+        mockMvc.perform(delete("/users/1"))
                 .andExpect(status().isOk());
     }
 
